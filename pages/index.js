@@ -3,11 +3,13 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Covid 19 Tracker App</title>
+        <title>COVID Tracker App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {/* create your dashboard by providing the design, theme and content */}
     </div>
   )
 }
