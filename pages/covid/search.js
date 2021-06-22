@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Head from 'next/head';
 import DoughnutChart from '../../components/DoughnutChart'
+import toNum from '../../helpers/toNum';
 
 //lets initialize a state hook to bind our form components with their respective values. 
 
@@ -10,10 +11,36 @@ export default function Search({ newData }) {
     //create a checker to see the data 
     console.log(newData);
 
+    //lets get the status of the countries by acquiring the countries_stat array which holds the collection/record of each country
+    const countryCollection = newData.countries_stat
+
+    //lets create 3 components that will decribe the information  that we will acquire from the records
+    const [deathCount, setDeathCount]= useState(0)
+    const [criticalCount, setCriticalCount]= useState(0)
+    const [recoveryCount, setRecoveryCount]= useState(0)    
 
     const [targetCountry, setTargetCountry] = useState("")
     //declare another component that will display the country that was found
     const [name, setName] = useState("")
+
+    //lets create a function that will query to search for a specific country insude our record
+    const search = (e) => {
+        e.preventDefault()// to avoid page redirection
+        const countryMatch = countryCollection.find(country => country.country_name === targetCountry)
+        //there are 2possible scenarios
+
+        if (!countryMatch || countryMatch === null || countryMatch === 'undefined') {
+            alert("Country Does Not Exist, use another name")
+            setName("")
+            setTargetCountry("")
+        } else {
+            console.log(countryMatch)//checker
+            setName(countryMatch.country_name)
+            setDeathCount(toNum(countryMatch.deaths))
+            setCriticalCount(toNum(countryMatch.serious_critical))
+            setRecoveryCount(toNum(countryMatch.total_recovered))
+        }
+    }
     return (
         <>
             <Head>
@@ -21,7 +48,7 @@ export default function Search({ newData }) {
                     COVID-19 Country Search
                 </title>
             </Head>
-            <Form>
+            <Form onSubmit={e => search(e)}>
                 <Form.Group controlId="country">
                     <Form.Label>
                         Country
@@ -39,10 +66,17 @@ export default function Search({ newData }) {
                 </Button>
             </Form>
 
-            <h1> Country: {name}</h1>
+            {name !== ""? 
+                <>
+                <h1> Country: {name}</h1>
+                 <DoughnutChart criticals={criticalCount} deaths={deathCount} recoveries={recoveryCount} />
+                 </>
+            :
+            
+            
             <Alert variant="info">Search for a country using the name</Alert>
-            <DoughnutChart />
-        </>
+            }
+            </>
     )
 }
 
