@@ -1,8 +1,13 @@
 import { Doughnut } from 'react-chartjs-2';
-import DoughnutChart from '../../components/DoughnutChart';
 
-export default function DoughtnutChart() {
+export default function Chart() {
     return(
-        <Doughnut />
+        <Doughnut 
+            data={{
+                labels: ['Criticals', 'Deaths', 'Recoveries']
+            }}
+            redraw={ false } 
+
+         />
     )
 }
