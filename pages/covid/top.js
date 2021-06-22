@@ -22,9 +22,29 @@ export default function top({ convertedData }) {
             //CREATE a logic that will convert strings to numerical data type/ 
         }
     })
+    //lets sanitize the data in order to view the countries withe the least number of covid cases
+
+    //sort() method ->sort the elements inside the array in place and returns the sorted  array
+    //inside the sort method, let's descibe how the elements inside the array will be evaluated
+
+    country.sort((firstEl, secondEl) => {
+    //lets create a control structure that will compare the cases per country according to the sequence they were fetched from the provider
+    //the comparison between 2 elements can lead to 3 possible scenarios
+        //1.true (a < b)
+        //2.false (a > b)
+        //3. equal (a = b)
+        if (firstEl.cases < secondEl.cases) {
+            return -1
+        } else if (firstEl.cases > secondEl.cases){
+            return 1
+        } else {
+            return 0
+        }
+    })
+
     return (
         <>
-            <h1> Top 10 Countries with the Highest Number of COVID-19 Cases</h1>
+            <h1> Top 10 Countries with the Lowest Number of COVID-19 Cases</h1>
             {/*we will feed the information to the diagram using the data attribute*/}
             {/* the value expects an object, that will describe the anatomy of the diagram*/}
             <Doughnut data={
