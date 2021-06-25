@@ -1,17 +1,15 @@
+import { Form } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2'
 //similar to pie chart 
 import toNum from '../../helpers/toNum';
+import { useState, useEffect } from "react"
+
 
 //start by creating a function that will describe the contents of the page.
 export default function top({ convertedData }) {
 
-    //lets see what the information looks like, so that we will be able to describe what data do we want to display or get.
-    console.log(convertedData);
-
     const countryStatus = convertedData.countries_stat
-
-    //our next task is to render each item inside array as an individual element. 
-    const country = countryStatus.map(countryStat => {
+    const [country, setCountry] = useState(countryStatus.map(countryStat => {
         //we will now return an object that will contain both the name and cases of each country
         return {
             //inside this object describe the anatomy of the data
@@ -21,13 +19,25 @@ export default function top({ convertedData }) {
 
             //CREATE a logic that will convert strings to numerical data type/ 
         }
-    })
+    }))
+
+    //lets see what the information looks like, so that we will be able to describe what data do we want to display or get.
+    console.log(convertedData);
+
+   
+
+    //our next task is to render each item inside array as an individual element. 
+    
+        
+    
+    
+
     //lets sanitize the data in order to view the countries withe the least number of covid cases
 
     //sort() method ->sort the elements inside the array in place and returns the sorted  array
     //inside the sort method, let's descibe how the elements inside the array will be evaluated
 
-    country.sort((firstEl, secondEl) => {
+    /* country.sort((firstEl, secondEl) => {
     //lets create a control structure that will compare the cases per country according to the sequence they were fetched from the provider
     //the comparison between 2 elements can lead to 3 possible scenarios
         //1.true (a < b)
@@ -40,11 +50,43 @@ export default function top({ convertedData }) {
         } else {
             return 0
         }
-    })
+    }) */
 
+    const showLeast10 = (e) => {
+        const checked = e.target.checked
+        if (checked) {
+            setCountry(country.sort((firstEl, secondEl) => {
+               
+                if (firstEl.cases < secondEl.cases) {
+                    return -1
+                } else if (firstEl.cases > secondEl.cases) {
+                    return 1
+                } else {
+                    return 0
+                }
+            }))
+            
+        }else {
+            setCountry(country.sort((firstEl, secondEl) => {
+
+                if (firstEl.cases > secondEl.cases) {
+                    return -1
+                } else if (firstEl.cases < secondEl.cases) {
+                    return 1
+                } else {
+                    return 0
+                }
+            }))
+        }
+    }
     return (
         <>
             <h1> Top 10 Countries with the Lowest Number of COVID-19 Cases</h1>
+            <Form>
+                <Form.Group>
+                    <Form.Check type="checkbox" label="Show countries with least number of cases" onClick={showLeast10}/>
+                </Form.Group>
+            </Form>
             {/*we will feed the information to the diagram using the data attribute*/}
             {/* the value expects an object, that will describe the anatomy of the diagram*/}
             <Doughnut data={

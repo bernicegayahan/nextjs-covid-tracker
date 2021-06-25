@@ -26,7 +26,7 @@ export default function Search({ newData }) {
     //lets create a function that will query to search for a specific country insude our record
     const search = (e) => {
         e.preventDefault()// to avoid page redirection
-        const countryMatch = countryCollection.find(country => country.country_name === targetCountry)
+        const countryMatch = countryCollection.find(country => country.country_name.toLowerCase() === targetCountry.toLowerCase())
         //there are 2possible scenarios
 
         if (!countryMatch || countryMatch === null || countryMatch === 'undefined') {
