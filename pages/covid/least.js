@@ -3,7 +3,6 @@ import { Doughnut } from 'react-chartjs-2'
 import toNum from '../../helpers/toNum'
 import { Button, Container } from 'react-bootstrap'
 
-
 //create a function that will describe the contents of the page
 export default function top({ convertedData }) {
 
@@ -36,9 +35,9 @@ export default function top({ convertedData }) {
         //2. false (a>b)
         //3. equal (a=b)
         if (firstEl.cases < secondEl.cases) {
-            return 1
-        } else if (firstEl.cases > secondEl.cases) {
             return -1
+        } else if (firstEl.cases > secondEl.cases) {
+            return 1
         } else {
             return 0
         }
@@ -51,7 +50,7 @@ export default function top({ convertedData }) {
                 <Button className="w-50 p-1" variant="danger" size="sm" href="/covid/top">Top 10 Countries with the Highest Number of Cases</Button>
                 <Button className="w-50 p-1" variant="warning" size="sm" href="/covid/least">Top Countries with the Lowest Number of Cases</Button>
             </Container>
-            <h1 className="text-center">Top 10 Countries with the HIGHEST Number of COVID-19 Cases</h1>
+            <h1 className="text-center">Top 10 Countries with the LOWEST Number of COVID-19 Cases</h1>
             {/*feed info to the diagram using the data={} attribute*/}
             {/*the value expect an object that will describe the anatomy of the diagram*/}
             <Doughnut data={
@@ -61,7 +60,7 @@ export default function top({ convertedData }) {
                     labels: [country[0].name, country[1].name, country[2].name, country[3].name, country[4].name, country[5].name, country[6].name, country[7].name, country[8].name, country[9].name],
                     datasets: [{
                         data: [country[0].cases, country[1].cases, country[2].cases, country[3].cases, country[4].cases, country[5].cases, country[6].cases, country[7].cases, country[8].cases, country[9].cases],
-                        backgroundColor: ['#fff100', '#ff8c00', '#e81123', '#ec008c', '#68217a', '#00188f', '#00bcf2', '#00b294', '	#009e49', '#bad80a']
+                        backgroundColor: ['#f768b8', '#fe8fc4', '#ffc0d3', '#ffe297', '#8fe9d7', '#44d0cc', '#00ccff', '#abafe8', '#7a6ea1', '#cc99cc']
                         //the diagram needs to create a visual representation of the information by representing the ration of each cases
                     }]
                 }

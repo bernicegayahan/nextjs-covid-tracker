@@ -19,7 +19,7 @@ export default function Search({ newData }) {
     const [criticalCount, setCriticalCount]= useState(0)
     const [recoveryCount, setRecoveryCount]= useState(0)    
 
-    const [targetCountry, setTargetCountry] = useState("")
+        const [targetCountry, setTargetCountry] = useState("")
     //declare another component that will display the country that was found
     const [name, setName] = useState("")
 
@@ -36,6 +36,7 @@ export default function Search({ newData }) {
         } else {
             console.log(countryMatch)//checker
             setName(countryMatch.country_name)
+             //before we feed/inject the data inside our diagram the information must be converted into numerical data type first. 
             setDeathCount(toNum(countryMatch.deaths))
             setCriticalCount(toNum(countryMatch.serious_critical))
             setRecoveryCount(toNum(countryMatch.total_recovered))
@@ -65,6 +66,7 @@ export default function Search({ newData }) {
                     Search for Country
                 </Button>
             </Form>
+
 
             {name !== ""? 
                 <>

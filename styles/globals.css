@@ -14,3 +14,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.jumbo {
+  min-height: 1080px;
+  background-image:url('../public/covid.png');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: 10% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.9;
+}
