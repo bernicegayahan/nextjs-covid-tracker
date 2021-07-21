@@ -49,7 +49,7 @@ export default function top({ convertedData }) {
         <>
             <Container className="mt-3">
                 <Button className="w-50 p-1" variant="danger" size="sm" href="/covid/top">Top 10 Countries with the Highest Number of Cases</Button>
-                <Button className="w-50 p-1" variant="warning" size="sm" href="/covid/least">Top Countries with the Lowest Number of Cases</Button>
+                <Button className="w-50 p-1" variant="warning" size="sm" href="/covid/least">Top 10 Countries with the Lowest Number of Cases</Button>
             </Container>
             <h1 className="text-center">Top 10 Countries with the HIGHEST Number of COVID-19 Cases</h1>
             {/*feed info to the diagram using the data={} attribute*/}
